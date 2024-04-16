@@ -1,0 +1,46 @@
+import React, { useState } from 'react'
+import axios from 'axios'
+const UpdatingApi = () => {
+    const data ={fname:"",lname:"",email:"",pnumber:"" }
+    const [userdata,setuserdata] =useState(data)
+    const handleChange=(e)=>{
+      setuserdata({ ...userdata,[e.target.name]:e.target.value})
+    }
+
+    const handlesubmit= (e)=>{
+      e.preventDefault()
+      axios.post('https://jsonplaceholder.typicode.com/users',userdata)
+      .then((response)=>{
+          console.log(response);
+
+      })
+  }
+
+
+
+  return (
+    <div> <h1> Update DataBase</h1><br/>
+        <div className='formDisplay'>
+
+
+            
+            <input type='radio'>New User</input>
+            <input type='radio'>Update</input>
+            <label>Name</label><br/>
+            <input name='fname' type='text' value={userdata.fname} onChange={handleChange}/>
+            <label>Surname</label><br/>
+            <input name='lname' type='text' value={userdata.lname} onChange={handleChange}/>
+            <label>Enter Email</label><br/>
+            <input name='lname' type='email' value={userdata.email} onChange={handleChange}/>
+            <label>Enter Phone number</label><br/>
+            <input name='lname' type='number' value={userdata.pnumber} onChange={handleChange}/><br/><br/>
+            <button onClick={handlesubmit}>Submit button</button>
+            <button ></button>
+            {/* <button onClick={handledisplay}>Show Data</button> */}
+            
+        </div>
+    </div>
+  )
+}
+
+export default UpdatingApi
